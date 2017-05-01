@@ -48,6 +48,16 @@ class PhotosController < ApplicationController
     p.caption = params[:the_caption]
     p.save
 
+    @the_id = p.id
+
+    redirect_to("/photos/#{@the_id}")
+  end
+
+  def delete_photo
+    p =Photo.find(params[:the_id])
+    p.destroy
+    @remaining_count = Photo.count
+
     redirect_to("/photos")
   end
 
